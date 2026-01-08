@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XnX - Private</title>
+    <title>XnX - Professional Aim Assistant</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -70,6 +70,8 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -1px;
+            display: flex;
+            align-items: center;
         }
 
         nav ul {
@@ -151,6 +153,7 @@
             justify-content: center;
             align-items: center;
             animation: slideInUp 1s ease-out 0.4s backwards;
+            perspective: 1000px;
         }
 
         .hero-image img {
@@ -162,6 +165,17 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(212, 175, 55, 0.3);
             backdrop-filter: blur(10px);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.08) translateY(-20px) rotateX(5deg);
+            box-shadow: 
+                0 60px 120px rgba(255, 23, 68, 0.4),
+                0 0 60px rgba(255, 82, 82, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 82, 82, 0.6);
         }
 
         /* Buttons */
@@ -436,14 +450,16 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="logo">XNX</div>
+        <div class="logo">
+            <img src="images/xnx-logo.png" alt="XnX Logo" style="height: 50px; width: auto;">
+        </div>
         <ul></ul>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>XnX Private</h1>
+            <h1>XnX Aim Assistant</h1>
             <p>Take your gaming performance to the next level. The aim assistant trusted by professional players worldwide.</p>
 
             <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
