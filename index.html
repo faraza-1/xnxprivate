@@ -442,7 +442,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Page Loader */
         #pageLoader {
             position: fixed;
             top: 0;
@@ -487,7 +486,6 @@
     </style>
 </head>
 <body>
-    <!-- Page Loader -->
     <div id="pageLoader">
         <div class="loader-content">
             <div class="loader-spinner"></div>
@@ -532,21 +530,21 @@
                 <h3>XNX</h3>
                 <div class="price">2000₺/45$</div>
                 <p>1 Month / Aylık</p>
-                <button class="btn btn-primary" onclick="redirectToShopier()">Buy Now</button>
+                <button class="btn btn-primary" onclick="redirectToShopier('1month')">Buy Now</button>
             </div>
 
             <div class="price-card featured fade-in">
                 <h3>XNX</h3>
                 <div class="price">4000₺/95$</div>
                 <p>3 Month / 3 Aylık</p>
-                <button class="btn btn-primary" onclick="redirectToShopier()">Buy Now</button>
+                <button class="btn btn-primary" onclick="redirectToShopier('3month')">Buy Now</button>
             </div>
 
             <div class="price-card fade-in">
                 <h3>XNX</h3>
                 <div class="price">7000₺/165$</div>
                 <p>Lifetime / Ömür Boyu Erişim</p>
-                <button class="btn btn-primary" onclick="redirectToShopier()">Buy Now</button>
+                <button class="btn btn-primary" onclick="redirectToShopier('lifetime')">Buy Now</button>
             </div>
         </div>
     </section>
@@ -576,7 +574,6 @@
     </footer>
 
     <script>
-        // Page Loader
         window.addEventListener('load', function() {
             const loader = document.getElementById('pageLoader');
             setTimeout(() => {
@@ -584,7 +581,6 @@
             }, 1000);
         });
 
-        // Smooth Scroll for Buy Now button
         document.addEventListener('DOMContentLoaded', function() {
             const smoothScrollLinks = document.querySelectorAll('.smooth-scroll');
             smoothScrollLinks.forEach(link => {
@@ -602,7 +598,13 @@
             });
         });
 
-        function redirectToShopier() {
+        function redirectToShopier(plan) {
+            const shopierLinks = {
+                '1month': 'https://www.shopier.com/xnxprivate/43034992',
+                '3month': 'https://www.shopier.com/xnxprivate/43035180',
+                'lifetime': 'https://www.shopier.com/xnxprivate/43035250'
+            };
+            
             const overlay = document.getElementById('loadingOverlay');
             const progressBar = document.getElementById('progressBar');
             const loadingText = document.getElementById('loadingText');
@@ -629,7 +631,7 @@
                 if (progress >= 100) {
                     clearInterval(interval);
                     setTimeout(() => {
-                        window.location.href = 'https://www.shopier.com/xnxprivate';
+                        window.location.href = shopierLinks[plan];
                     }, 300);
                 }
             }, 30);
