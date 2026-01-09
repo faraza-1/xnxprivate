@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XnX</title>
+    <title>XnX - Premium Gaming Assistant</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -29,9 +29,13 @@
             line-height: 1.7;
             overflow-x: hidden;
             letter-spacing: 0.3px;
+            cursor: none !important;
         }
 
-        /* Premium Background Effect */
+        * {
+            cursor: none !important;
+        }
+
         body::before {
             content: '';
             position: fixed;
@@ -46,7 +50,6 @@
             z-index: 0;
         }
 
-        /* Navbar */
         nav {
             display: flex;
             justify-content: space-between;
@@ -58,7 +61,6 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            mix-blend-mode: normal;
         }
 
         .logo {
@@ -72,11 +74,6 @@
             letter-spacing: -1px;
         }
 
-        nav ul {
-            list-style: none;
-        }
-
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -164,7 +161,7 @@
             border: 1px solid rgba(212, 175, 55, 0.3);
             backdrop-filter: blur(10px);
             transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            cursor: pointer;
+            cursor: none;
         }
 
         .hero-image img:hover {
@@ -176,13 +173,12 @@
             border-color: rgba(255, 82, 82, 0.6);
         }
 
-        /* Buttons */
         .btn {
             padding: 1.2rem 3rem;
             font-size: 1rem;
             border: none;
             border-radius: 50px;
-            cursor: pointer;
+            cursor: none;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             font-weight: 600;
             text-decoration: none;
@@ -241,7 +237,6 @@
                 0 0 20px rgba(255, 23, 68, 0.3);
         }
 
-        /* Pricing Section */
         .pricing {
             padding: 8rem 5%;
             text-align: center;
@@ -370,7 +365,6 @@
             width: 100%;
         }
 
-        /* Footer */
         footer {
             background: rgba(5, 10, 26, 0.9);
             padding: 3rem 5%;
@@ -386,13 +380,13 @@
             color: #ff1744;
             text-decoration: none;
             transition: color 0.3s;
+            cursor: none;
         }
 
         footer a:hover {
             color: #ff5252;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .hero {
                 flex-direction: column;
@@ -427,7 +421,6 @@
             }
         }
 
-        /* Scroll Animation */
         .fade-in {
             opacity: 0;
             animation: fadeIn 1s ease-out forwards;
@@ -443,24 +436,86 @@
                 transform: translateY(0);
             }
         }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Page Loader */
+        #pageLoader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a0033 50%, #050a1a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #pageLoader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(255, 23, 68, 0.2);
+            border-top-color: #ff1744;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+            box-shadow: 0 0 30px rgba(255, 23, 68, 0.4);
+        }
+
+        .loader-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #ff1744;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Page Loader -->
+    <div id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">XNX PRIVATE</div>
+        </div>
+    </div>
+
     <nav>
-        <div class="logo">XNX PRIVATE</div>
+        <div class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
+            <img src="images/xnx-logo.png" alt="XNX Logo" style="width: 40px; height: 40px; object-fit: contain;">
+            XNX PRIVATE
+        </div>
         <ul></ul>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>XnX</h1>
             <p>Take your gaming performance to the next level. The aim assistant trusted by professional players worldwide.</p>
 
-            <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="#buy" class="btn btn-primary">Buy Now</a>
-                <a href="#pricing" class="btn btn-secondary">Learn More</a>
+            <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                <a href="#pricing" class="btn btn-primary smooth-scroll">Buy Now</a>
+                <a href="https://discord.gg/xnxprivate" target="_blank" class="btn btn-secondary" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                    Discord
+                </a>
             </div>
         </div>
 
@@ -469,7 +524,6 @@
         </div>
     </section>
 
-    <!-- Pricing Section -->
     <section class="pricing" id="pricing">
         <h2 class="section-title">Pricing Plans</h2>
         
@@ -478,42 +532,109 @@
                 <h3>XNX</h3>
                 <div class="price">2000₺/45$</div>
                 <p>1 Month / Aylık</p>
-                <button class="btn btn-primary" onclick="window.location.href='https://www.shopier.com/MottoTrend/42323235'">Buy Now</button>
+                <button class="btn btn-primary" onclick="redirectToShopier()">Buy Now</button>
             </div>
 
             <div class="price-card featured fade-in">
                 <h3>XNX</h3>
                 <div class="price">4000₺/95$</div>
                 <p>3 Month / 3 Aylık</p>
-                <button class="btn btn-primary" onclick="window.location.href='https://www.shopier.com/MottoTrend/42323235'">Buy Now</button>
+                <button class="btn btn-primary" onclick="redirectToShopier()">Buy Now</button>
             </div>
 
             <div class="price-card fade-in">
                 <h3>XNX</h3>
                 <div class="price">7000₺/165$</div>
                 <p>Lifetime / Ömür Boyu Erişim</p>
-                <button class="btn btn-primary" onclick="window.location.href='https://www.shopier.com/MottoTrend/42323235'">Buy Now</button>
+                <button class="btn btn-primary" onclick="redirectToShopier()">Buy Now</button>
             </div>
         </div>
     </section>
 
-    <!-- Hidden Payment Form -->
-    <form id="shopierPaymentForm" method="POST" action="payment.php" style="display:none;">
-        <input type="hidden" name="plan" id="shopierPlan">
-        <input type="hidden" name="user_id" value="">
-        <input type="hidden" name="first_name" value="">
-        <input type="hidden" name="last_name" value="">
-        <input type="hidden" name="email" value="">
-        <input type="hidden" name="phone" value="">
-    </form>
+    <div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 14, 39, 0.95); z-index: 10001; backdrop-filter: blur(10px);">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 90%; max-width: 400px;">
+            <div style="font-family: 'Playfair Display', serif; font-size: 2rem; color: #ff1744; margin-bottom: 2rem; font-weight: 700;">
+                Redirecting to Shopier...
+            </div>
+            
+            <div style="width: 100%; height: 8px; background: rgba(255, 23, 68, 0.2); border-radius: 10px; overflow: hidden; margin-bottom: 1rem; position: relative;">
+                <div id="progressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ff1744, #ff5252); border-radius: 10px; transition: width 0.1s linear; box-shadow: 0 0 20px rgba(255, 23, 68, 0.6);"></div>
+            </div>
+            
+            <div id="loadingText" style="color: #d0d0d0; font-size: 0.95rem; margin-top: 1rem;">
+                Preparing payment page...
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <div style="width: 50px; height: 50px; border: 3px solid rgba(255, 23, 68, 0.3); border-top-color: #ff1744; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 XnX Assistant. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </footer>
 
     <script>
-        // Custom Animated Cursor
+        // Page Loader
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('pageLoader');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 1000);
+        });
+
+        // Smooth Scroll for Buy Now button
+        document.addEventListener('DOMContentLoaded', function() {
+            const smoothScrollLinks = document.querySelectorAll('.smooth-scroll');
+            smoothScrollLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+
+        function redirectToShopier() {
+            const overlay = document.getElementById('loadingOverlay');
+            const progressBar = document.getElementById('progressBar');
+            const loadingText = document.getElementById('loadingText');
+            
+            overlay.style.display = 'block';
+            
+            let progress = 0;
+            const messages = [
+                'Preparing payment page...',
+                'Establishing secure connection...',
+                'Redirecting to Shopier...'
+            ];
+            
+            const interval = setInterval(() => {
+                progress += 2;
+                progressBar.style.width = progress + '%';
+                
+                if (progress >= 30 && progress < 60) {
+                    loadingText.textContent = messages[1];
+                } else if (progress >= 60) {
+                    loadingText.textContent = messages[2];
+                }
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        window.location.href = 'https://www.shopier.com/MottoTrend/42323235';
+                    }, 300);
+                }
+            }, 30);
+        }
+
         const cursor = document.createElement('div');
         const cursorDot = document.createElement('div');
         
@@ -561,7 +682,6 @@
             mouseY = e.clientY;
         });
         
-        // Smooth cursor movement
         function animate() {
             cursorX += (mouseX - cursorX) * 0.2;
             cursorY += (mouseY - cursorY) * 0.2;
@@ -580,7 +700,6 @@
         
         animate();
         
-        // Cursor scale on hover
         document.addEventListener('mouseover', (e) => {
             if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.classList.contains('btn')) {
                 cursor.style.width = '50px';
@@ -613,7 +732,6 @@
             }
         });
         
-        // Hide custom cursor when leaving window
         document.addEventListener('mouseleave', () => {
             cursor.style.opacity = '0';
             cursorDot.style.opacity = '0';
@@ -623,59 +741,19 @@
             cursor.style.opacity = '1';
             cursorDot.style.opacity = '1';
         });
-        
-        // Hide default cursor
-        document.body.style.cursor = 'none';
 
-        function buyShopier(plan) {
-            // Shopier ödeme formunu aç
-            const form = document.getElementById('shopierPaymentForm');
-            
-            // Plan'ı belirle
-            const planMap = {
-                'standard': 'standard',
-                'pro': 'pro',
-                'elite': 'elite'
-            };
-            
-            // Kullanıcı bilgilerini iste
-            const email = prompt('Enter your email:');
-            if (!email) {
-                alert('Email is required');
-                return;
-            }
-            
-            const firstName = prompt('Enter your first name:');
-            const lastName = prompt('Enter your last name:');
-            const phone = prompt('Enter your phone number (optional):');
-            
-            // Form alanlarını doldur
-            form.querySelector('input[name="plan"]').value = planMap[plan];
-            form.querySelector('input[name="email"]').value = email;
-            form.querySelector('input[name="first_name"]').value = firstName || 'User';
-            form.querySelector('input[name="last_name"]').value = lastName || 'User';
-            form.querySelector('input[name="phone"]').value = phone || '5555555555';
-            form.querySelector('input[name="user_id"]').value = 'user_' + Math.random().toString(36).substr(2, 9);
-            
-            // Form'u submit et ve Shopier'a yönlendir
-            form.submit();
-        }
-
-        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#buy' && href !== '#') {
+            if (!anchor.classList.contains('smooth-scroll')) {
+                anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    const target = document.querySelector(href);
+                    const target = document.querySelector(this.getAttribute('href'));
                     if (target) {
                         target.scrollIntoView({ behavior: 'smooth' });
                     }
-                }
-            });
+                });
+            }
         });
 
-        // Fade in animation on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
