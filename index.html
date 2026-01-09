@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XnX - Premium Gaming Assistant</title>
+    
+    <!-- Discord Embed Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="XNX Private">
+    <meta property="og:title" content="XnX - Premium Gaming Assistant">
+    <meta property="og:description" content="Take your gaming performance to the next level. The aim assistant trusted by professional players worldwide.">
+    <meta property="og:image" content="https://yourwebsite.com/images/xnx-app.png">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <meta name="theme-color" content="#ff1744">
+    
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -574,16 +584,38 @@
     </footer>
 
     <script>
+        // Sayfa yüklendiğinde tüm overlay'leri gizle
         window.addEventListener('load', function() {
             const loader = document.getElementById('pageLoader');
             const overlay = document.getElementById('loadingOverlay');
             
+            // Loading overlay'i gizle
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
+            
+            // Page loader'ı gizle
             setTimeout(() => {
                 loader.classList.add('hidden');
             }, 1000);
-            
-            // Sayfa yüklendiğinde loading overlay'i gizle
-            overlay.style.display = 'none';
+        });
+        
+        // Sayfa her görünür olduğunda overlay'i gizle (geri geldiğinde)
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                const overlay = document.getElementById('loadingOverlay');
+                if (overlay) {
+                    overlay.style.display = 'none';
+                }
+            }
+        });
+        
+        // Sayfa odaklandığında overlay'i gizle
+        window.addEventListener('focus', function() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
         });
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -605,9 +637,9 @@
 
         function redirectToShopier(plan) {
             const shopierLinks = {
-                '1month': 'https://www.shopier.com/xnxprivate/1month',
-                '3month': 'https://www.shopier.com/xnxprivate/3month',
-                'lifetime': 'https://www.shopier.com/xnxprivate/lifetime'
+                '1month': 'https://www.shopier.com/xnxprivate/43034992',
+                '3month': 'https://www.shopier.com/xnxprivate/43035180',
+                'lifetime': 'https://www.shopier.com/xnxprivate/43035250'
             };
             
             const overlay = document.getElementById('loadingOverlay');
