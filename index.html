@@ -59,6 +59,16 @@
             top: 0;
             z-index: 1000;
             mix-blend-mode: normal;
+            animation: slideNav 2s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        @keyframes slideNav {
+            0% { transform: translateX(0px); }
+            25% { transform: translateX(25px); }
+            50% { transform: translateX(0px); }
+            75% { transform: translateX(-25px); }
+            100% { transform: translateX(0px); }
         }
 
         .logo {
@@ -70,6 +80,16 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -1px;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px rgba(255, 23, 68, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 30px rgba(255, 23, 68, 0.8));
+            }
         }
 
         nav ul {
@@ -459,13 +479,13 @@
             <p>Take your gaming performance to the next level. The aim assistant trusted by professional players worldwide.</p>
 
             <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="#buy" class="btn btn-primary">Buy Now</a>
+                <a href="#pricing" class="btn btn-primary">Buy Now</a>
                 <a href="#pricing" class="btn btn-secondary">Learn More</a>
             </div>
         </div>
 
         <div class="hero-image">
-            <img src="images/xnx-app.png" alt="XnX Interface">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23ff1744' width='400' height='400' opacity='0.1'/%3E%3C/svg%3E" alt="XnX Interface">
         </div>
     </section>
 
@@ -478,34 +498,24 @@
                 <h3>XNX</h3>
                 <div class="price">2000₺/45$</div>
                 <p>1 Month / Aylık</p>
-                <button class="btn btn-primary" onclick="buyShopier('standard')">Buy Now</button>
+                <button class="btn btn-primary" onclick="openPaymentPage('standard')">Buy Now</button>
             </div>
 
             <div class="price-card featured fade-in">
                 <h3>XNX</h3>
                 <div class="price">4000₺/95$</div>
                 <p>3 Month / 3 Aylık</p>
-                <button class="btn btn-primary" onclick="buyShopier('pro')">Buy Now</button>
+                <button class="btn btn-primary" onclick="openPaymentPage('pro')">Buy Now</button>
             </div>
 
             <div class="price-card fade-in">
                 <h3>XNX</h3>
                 <div class="price">7000₺/165$</div>
                 <p>Lifetime / Ömür Boyu Erişim</p>
-                <button class="btn btn-primary" onclick="buyShopier('elite')">Buy Now</button>
+                <button class="btn btn-primary" onclick="openPaymentPage('elite')">Buy Now</button>
             </div>
         </div>
     </section>
-
-    <!-- Hidden Payment Form -->
-    <form id="shopierPaymentForm" method="POST" action="payment.php" style="display:none;">
-        <input type="hidden" name="plan" id="shopierPlan">
-        <input type="hidden" name="user_id" value="">
-        <input type="hidden" name="first_name" value="">
-        <input type="hidden" name="last_name" value="">
-        <input type="hidden" name="email" value="">
-        <input type="hidden" name="phone" value="">
-    </form>
 
     <!-- Footer -->
     <footer>
@@ -561,7 +571,6 @@
             mouseY = e.clientY;
         });
         
-        // Smooth cursor movement
         function animate() {
             cursorX += (mouseX - cursorX) * 0.2;
             cursorY += (mouseY - cursorY) * 0.2;
@@ -580,7 +589,6 @@
         
         animate();
         
-        // Cursor scale on hover
         document.addEventListener('mouseover', (e) => {
             if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.classList.contains('btn')) {
                 cursor.style.width = '50px';
@@ -613,7 +621,6 @@
             }
         });
         
-        // Hide custom cursor when leaving window
         document.addEventListener('mouseleave', () => {
             cursor.style.opacity = '0';
             cursorDot.style.opacity = '0';
@@ -624,48 +631,149 @@
             cursorDot.style.opacity = '1';
         });
         
-        // Hide default cursor
         document.body.style.cursor = 'none';
 
-        function buyShopier(plan) {
-            // Shopier ödeme formunu aç
-            const form = document.getElementById('shopierPaymentForm');
-            
-            // Plan'ı belirle
-            const planMap = {
-                'standard': 'standard',
-                'pro': 'pro',
-                'elite': 'elite'
+        // Demo Payment Page
+        function openPaymentPage(plan) {
+            const planData = {
+                'standard': { name: 'XNX - 1 Ay', price: 45, duration: '1 Ay', localPrice: '2000 ₺' },
+                'pro': { name: 'XNX - 3 Ay', price: 95, duration: '3 Ay', localPrice: '4000 ₺' },
+                'elite': { name: 'XNX - Lifetime', price: 165, duration: 'Ömür Boyu', localPrice: '7000 ₺' }
             };
             
-            // Kullanıcı bilgilerini iste
-            const email = prompt('Enter your email:');
-            if (!email) {
-                alert('Email is required');
-                return;
-            }
+            const selected = planData[plan];
             
-            const firstName = prompt('Enter your first name:');
-            const lastName = prompt('Enter your last name:');
-            const phone = prompt('Enter your phone number (optional):');
+            const paymentHTML = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XNX - Ödeme</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a0033 50%, #050a1a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container { background: rgba(20,20,40,0.95); border: 2px solid rgba(212,175,55,0.3); border-radius: 20px; padding: 40px; max-width: 500px; width: 100%; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .logo { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #ff1744, #ff5252); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .title { color: #fff; font-size: 1.3rem; margin: 10px 0; }
+        .badge { display: inline-block; background: rgba(255,23,68,0.2); border: 1px solid #ff1744; color: #ff1744; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; }
+        .plan { background: rgba(255,23,68,0.1); border: 1px solid rgba(255,23,68,0.3); border-radius: 15px; padding: 20px; margin: 30px 0; }
+        .plan-name { color: #ff1744; font-weight: 600; font-size: 1.1rem; margin-bottom: 10px; }
+        .detail { display: flex; justify-content: space-between; padding: 8px 0; color: #d0d0d0; border-bottom: 1px solid rgba(212,175,55,0.1); }
+        .price-box { background: rgba(255,23,68,0.15); border-radius: 15px; padding: 20px; text-align: center; margin: 20px 0; }
+        .price-text { color: #999; margin-bottom: 10px; }
+        .price-amount { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #ff1744, #ff5252); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { color: #d0d0d0; font-size: 0.9rem; display: block; margin-bottom: 8px; font-weight: 500; }
+        .form-input { width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.2); border-radius: 10px; color: #fff; font-family: 'Inter', sans-serif; }
+        .form-input:focus { outline: none; border-color: #ff1744; }
+        .btn-group { display: flex; gap: 10px; margin-top: 20px; }
+        .btn { flex: 1; padding: 12px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: 'Inter', sans-serif; }
+        .btn-pay { background: linear-gradient(135deg, #ff1744, #d32f2f); color: white; }
+        .btn-pay:hover { transform: translateY(-2px); }
+        .btn-cancel { background: transparent; border: 2px solid #ff1744; color: #ff1744; }
+        .security { padding: 15px; background: rgba(100,200,100,0.1); border: 1px solid rgba(100,200,100,0.3); border-radius: 10px; margin-top: 20px; color: #a0d0a0; font-size: 0.85rem; }
+        .success { text-align: center; }
+        .success-icon { font-size: 4rem; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">XNX</div>
+            <div class="title">Ödeme İşlemi</div>
+            <div class="badge">🧪 TEST MODU</div>
+        </div>
+        
+        <div class="plan">
+            <div class="plan-name">${selected.name}</div>
+            <div class="detail">
+                <span>Süre:</span>
+                <span style="color: #fff; font-weight: 600;">${selected.duration}</span>
+            </div>
+            <div class="detail">
+                <span>Fiyat (USD):</span>
+                <span style="color: #fff; font-weight: 600;">$${selected.price}</span>
+            </div>
+            <div class="detail">
+                <span>Fiyat (TL):</span>
+                <span style="color: #fff; font-weight: 600;">${selected.localPrice}</span>
+            </div>
+        </div>
+        
+        <div class="price-box">
+            <div class="price-text">Toplam Tutar</div>
+            <div class="price-amount">$${selected.price}</div>
+        </div>
+        
+        <form id="paymentForm" onsubmit="processPayment(event)">
+            <div class="form-group">
+                <label class="form-label">Ad Soyad</label>
+                <input type="text" class="form-input" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" placeholder="example@email.com" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Kart Numarası</label>
+                <input type="text" class="form-input" placeholder="4242 4242 4242 4242" maxlength="19" required>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <div style="flex: 1;">
+                    <label class="form-label">AA/YY</label>
+                    <input type="text" class="form-input" placeholder="12/26" maxlength="5" required>
+                </div>
+                <div style="flex: 1;">
+                    <label class="form-label">CVC</label>
+                    <input type="text" class="form-input" placeholder="123" maxlength="3" required>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-cancel" onclick="window.close()">İptal</button>
+                <button type="submit" class="btn btn-pay">Ödeme Yap</button>
+            </div>
+        </form>
+        
+        <div class="security">
+            🔒 Bu bir TEST ortamıdır. Gerçek ödeme alınmayacaktır.
+        </div>
+    </div>
+
+    <script>
+        function processPayment(e) {
+            e.preventDefault();
+            const btn = document.querySelector('.btn-pay');
+            btn.textContent = '⏳ İşleniyor...';
+            btn.disabled = true;
             
-            // Form alanlarını doldur
-            form.querySelector('input[name="plan"]').value = planMap[plan];
-            form.querySelector('input[name="email"]').value = email;
-            form.querySelector('input[name="first_name"]').value = firstName || 'User';
-            form.querySelector('input[name="last_name"]').value = lastName || 'User';
-            form.querySelector('input[name="phone"]').value = phone || '5555555555';
-            form.querySelector('input[name="user_id"]').value = 'user_' + Math.random().toString(36).substr(2, 9);
+            setTimeout(() => {
+                document.querySelector('.container').innerHTML = '<div class="header success"><div class="success-icon">✅</div><div class="title">Ödeme Başarılı!</div></div><div class="plan"><div class="plan-name">Teşekkür Ederiz</div><div style="color: #d0d0d0; line-height: 1.8;"><p style="margin-bottom: 15px;">Ödemeniz başarıyla alındı.</p><p style="margin-bottom: 15px;">Erişim kimlik bilgileriniz email adresinize gönderilecektir.</p><p style="color: #ff1744; font-weight: 600;">XNX PRIVATE aracı artık kullanıma hazır!</p></div></div><div class="btn-group"><button class="btn btn-pay" onclick="window.close()">Kapat</button></div>';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>`;
             
-            // Form'u submit et ve Shopier'a yönlendir
-            form.submit();
+            const blob = new Blob([paymentHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            window.open(url, '_blank');
         }
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
-                if (href !== '#buy' && href !== '#') {
+                if (href !== '#') {
                     e.preventDefault();
                     const target = document.querySelector(href);
                     if (target) {
@@ -675,7 +783,7 @@
             });
         });
 
-        // Fade in animation on scroll
+        // Fade in animation
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
