@@ -46,7 +46,7 @@
             z-index: 0;
         }
 
-        /* Navbar */
+        /* Navbar - Sağa Sola Hareket Animasyonu */
         nav {
             display: flex;
             justify-content: space-between;
@@ -59,6 +59,17 @@
             top: 0;
             z-index: 1000;
             mix-blend-mode: normal;
+            animation: slideNav 4s ease-in-out infinite;
+        }
+
+        /* Navbar Animasyonu: Sağa Sola Hareket */
+        @keyframes slideNav {
+            0%, 100% { 
+                transform: translateX(0px); 
+            }
+            50% { 
+                transform: translateX(20px); 
+            }
         }
 
         .logo {
@@ -695,5 +706,6 @@
             observer.observe(el);
         });
     </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"e56b75fca3d14759bf67ab7192182050","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
