@@ -29,7 +29,6 @@
             line-height: 1.7;
             overflow-x: hidden;
             letter-spacing: 0.3px;
-            padding-top: 100px;
         }
 
         /* Premium Background Effect */
@@ -47,7 +46,7 @@
             z-index: 0;
         }
 
-        /* Navbar - Sağa Sola Hareket Animasyonu */
+        /* Navbar */
         nav {
             display: flex;
             justify-content: space-between;
@@ -56,34 +55,10 @@
             background: rgba(10, 14, 39, 0.7);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
             z-index: 1000;
             mix-blend-mode: normal;
-            animation: slideNav 2s ease-in-out infinite;
-            will-change: transform;
-            transform-origin: center;
-        }
-
-        /* Navbar Animasyonu: Sağa Sola Hareket - Daha Belirgin */
-        @keyframes slideNav {
-            0% { 
-                transform: translateX(0px); 
-            }
-            25% { 
-                transform: translateX(25px); 
-            }
-            50% { 
-                transform: translateX(0px); 
-            }
-            75% { 
-                transform: translateX(-25px); 
-            }
-            100% { 
-                transform: translateX(0px); 
-            }
         }
 
         .logo {
@@ -720,6 +695,5 @@
             observer.observe(el);
         });
     </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"e56b75fca3d14759bf67ab7192182050","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
