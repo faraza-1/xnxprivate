@@ -29,6 +29,7 @@
             line-height: 1.7;
             overflow-x: hidden;
             letter-spacing: 0.3px;
+            padding-top: 100px;
         }
 
         /* Premium Background Effect */
@@ -55,20 +56,33 @@
             background: rgba(10, 14, 39, 0.7);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
             mix-blend-mode: normal;
-            animation: slideNav 4s ease-in-out infinite;
+            animation: slideNav 2s ease-in-out infinite;
+            will-change: transform;
+            transform-origin: center;
         }
 
-        /* Navbar Animasyonu: Sağa Sola Hareket */
+        /* Navbar Animasyonu: Sağa Sola Hareket - Daha Belirgin */
         @keyframes slideNav {
-            0%, 100% { 
+            0% { 
                 transform: translateX(0px); 
             }
+            25% { 
+                transform: translateX(25px); 
+            }
             50% { 
-                transform: translateX(20px); 
+                transform: translateX(0px); 
+            }
+            75% { 
+                transform: translateX(-25px); 
+            }
+            100% { 
+                transform: translateX(0px); 
             }
         }
 
