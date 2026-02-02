@@ -8,7 +8,8 @@
     <!-- Title -->
     <title>XNX PRIVATE</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">    <style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -154,7 +155,7 @@
             perspective: 1000px;
         }
 
-        .hero-image img {
+        .hero-image video {
             max-width: 100%;
             height: auto;
             border-radius: 30px;
@@ -167,7 +168,7 @@
             cursor: none;
         }
 
-        .hero-image img:hover {
+        .hero-image video:hover {
             transform: scale(1.08) translateY(-20px) rotateX(5deg);
             box-shadow: 
                 0 60px 120px rgba(255, 23, 68, 0.4),
@@ -498,7 +499,7 @@
 
     <nav>
         <div class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
-            <img src="" alt="XNX Logo" style="width: 40px; height: 40px; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <img src="images/xnx-logo.png" alt="XNX Logo" style="width: 40px; height: 40px; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <span style="display: none;">XNX PRIVATE</span>
         </div>
         <ul></ul>
@@ -521,7 +522,10 @@
         </div>
 
         <div class="hero-image">
-            <img src="images/xnx-app.png" alt="XnX Interface">
+            <video autoplay muted loop playsinline>
+                <source src="videos/xnx-demo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     </section>
 
